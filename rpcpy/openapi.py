@@ -17,9 +17,9 @@ __all__ = [
 Callable = typing.TypeVar("Callable", bound=typing.Callable)
 
 try:
+    from pydantic import VERSION as PYDANTIC_VERSION
     from pydantic import BaseModel, ValidationError, create_model
     from pydantic import validate_arguments as pydantic_validate_arguments
-    from pydantic import VERSION as PYDANTIC_VERSION
 
     IS_PYDANTIC_V2 = int(PYDANTIC_VERSION.split(".")[0]) >= 2
 
@@ -58,8 +58,8 @@ except ImportError:
         """
 
     if typing.TYPE_CHECKING:
-        from pydantic import BaseModel
         from pydantic import VERSION as PYDANTIC_VERSION
+        from pydantic import BaseModel
 
 if IS_PYDANTIC_V2:
     from pydantic import RootModel
