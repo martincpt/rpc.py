@@ -1,5 +1,4 @@
 import asyncio
-import time
 from typing import AsyncGenerator, Generator
 
 import httpx
@@ -88,8 +87,7 @@ def async_client(asgi_app):
 
 def test_sync_client(sync_client):
     @sync_client.remote_call
-    def sayhi(name: str) -> str:
-        ...
+    def sayhi(name: str) -> str: ...
 
     assert sayhi("rpc.py") == "hi rpc.py"
 
@@ -99,8 +97,7 @@ def test_sync_client(sync_client):
     ):
 
         @sync_client.remote_call
-        async def sayhi(name: str) -> str:
-            ...
+        async def sayhi(name: str) -> str: ...
 
     @sync_client.remote_call
     def yield_data(max_num: int):
@@ -112,8 +109,7 @@ def test_sync_client(sync_client):
         index += 1
 
     @sync_client.remote_call
-    def exception() -> str:
-        ...
+    def exception() -> str: ...
 
     with pytest.raises(RemoteCallError, match="ValueError: Message"):
         exception()
@@ -130,8 +126,7 @@ def test_sync_client(sync_client):
 @pytest.mark.asyncio
 async def test_async_client(async_client):
     @async_client.remote_call
-    async def sayhi(name: str) -> str:
-        ...
+    async def sayhi(name: str) -> str: ...
 
     assert await sayhi("rpc.py") == "hi rpc.py"
 
@@ -141,8 +136,7 @@ async def test_async_client(async_client):
     ):
 
         @async_client.remote_call
-        def sayhi(name: str) -> str:
-            ...
+        def sayhi(name: str) -> str: ...
 
     @async_client.remote_call
     async def yield_data(max_num: int):
@@ -154,8 +148,7 @@ async def test_async_client(async_client):
         index += 1
 
     @async_client.remote_call
-    async def exception() -> str:
-        ...
+    async def exception() -> str: ...
 
     with pytest.raises(RemoteCallError, match="ValueError: Message"):
         await exception()
@@ -171,8 +164,7 @@ async def test_async_client(async_client):
 
 def test_none(sync_client):
     @sync_client.remote_call
-    def none() -> None:
-        ...
+    def none() -> None: ...
 
     assert none() is None
 
@@ -183,8 +175,7 @@ def test_none(sync_client):
 @pytest.mark.asyncio
 async def test_async_none(async_client):
     @async_client.remote_call
-    async def none() -> None:
-        ...
+    async def none() -> None: ...
 
     assert await none() is None
 
